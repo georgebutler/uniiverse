@@ -36,83 +36,71 @@ const SignUp = () => {
     })
   }
 
-  /** 
-  const [validBirthday, setValidBirthday] = useState(true);
-
-  const validateBirthday = () => {
-    if (birthdayDay.length > 0 && birthdayMonth.length > 0 && birthdayYear.length > 0) {
-      setValidBirthday(moment(`${birthdayYear}${birthdayMonth}${birthdayDay}`, "YYYYMMDD").isValid());
-    }
-  }
-
-  useEffect(() => {
-    validateBirthday();
-  });
-  */
-
   return (
-    <div className="pt-3 pb-3">
-      <div className="text-center text-3xl font-extrabold">Sign Up</div>
-      <Formik
-        initialValues={{
-          username: '',
-          password: '',
-          passwordConfirm: '',
-          birthdayMonth: '',
-          birthdayDay: '',
-          birthdayYear: ''
-        }}
-        validate={values => {
-          const errors = {};
+    <div className="min-h-full">
+      <div className="container mx-auto py-3 px-3 mt-3 rounded-md bg-gray-200">
+        <div>
+          <h1 className="text-center text-3xl font-extrabold">Sign Up</h1>
+        </div>
+        <Formik
+          initialValues={{
+            username: '',
+            password: '',
+            passwordConfirm: '',
+            birthdayMonth: '',
+            birthdayDay: '',
+            birthdayYear: ''
+          }}
+          validate={values => {
+            const errors = {};
 
-          if (!values.username) {
-            errors.username = 'Required';
-          } else if (values.username.length < 3 || values.username.length > 16) {
-            errors.username = 'Username must be between 3 and 16 characters.'
-          }
+            if (!values.username) {
+              errors.username = 'Required';
+            } else if (values.username.length < 3 || values.username.length > 16) {
+              errors.username = 'Username must be between 3 and 16 characters.'
+            }
 
-          if (!values.password) {
-            errors.password = 'Required';
-          } else if (values.password.length < 6) {
-            errors.password = 'Password must be at least 6 characters.'
-          }
+            if (!values.password) {
+              errors.password = 'Required';
+            } else if (values.password.length < 6) {
+              errors.password = 'Password must be at least 6 characters.'
+            }
 
-          if (!values.passwordConfirm) {
-            errors.passwordConfirm = 'Required';
-          } else if (values.password !== values.passwordConfirm) {
-            errors.passwordConfirm = 'Passwords must match.'
-          }
+            if (!values.passwordConfirm) {
+              errors.passwordConfirm = 'Required';
+            } else if (values.password !== values.passwordConfirm) {
+              errors.passwordConfirm = 'Passwords must match.'
+            }
 
-          if (!moment(`${values.birthdayYear}${values.birthdayMonth}${values.birthdayDay}`, "YYYYMMDD").isValid()) {
-            errors.birthdayYear = 'Invalid birthday.';
-          }
+            if (!moment(`${values.birthdayYear}${values.birthdayMonth}${values.birthdayDay}`, "YYYYMMDD").isValid()) {
+              errors.birthdayYear = 'Invalid birthday.';
+            }
 
-          return errors;
-        }}
-        onSubmit={(values, { setSubmitting }) => {
-          console.log("Hello world!");
-          console.log(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }}
-      >
+            return errors;
+          }}
+          onSubmit={(values, { setSubmitting }) => {
+            console.log(JSON.stringify(values, null, 2));
+            setSubmitting(false);
+          }}
+        >
           <Form>
-            <div>
-              <div>Username</div>
-                <Field className="block w-full" type="text" name="username" />
-                <ErrorMessage name="username" component="div" className="block w-full bg-red-500 text-white py-2"/>
-              </div>
-            <div>
-              <div>Password</div>
-                <Field className="block w-full" type="password" name="password" />
-                <ErrorMessage name="password" component="div" className="block w-full bg-red-500 text-white py-2"/>
-              </div>
-            <div>
-              <div>Confirm Password</div>
-                <Field className="block w-full" type="password" name="passwordConfirm" />
-                <ErrorMessage name="passwordConfirm" component="div" className="block w-full bg-red-500 text-white py-2"/>
-              </div>
-            <div>
-              <div>Birthday</div>
+            <div className="py-1">
+              <div className="mb-2">Username</div>
+              <Field className="block w-full rounded" type="text" name="username" placeholder="Don't include personal information" />
+              <ErrorMessage name="username" component="div" className="block w-full text-red-500 py-2" />
+            </div>
+            <div className="py-1">
+              <div className="mb-2">Password</div>
+              <Field className="block w-full rounded" type="password" name="password" placeholder="Minimum of 8 characters" />
+              <ErrorMessage name="password" component="div" className="block w-full text-red-500 py-2" />
+            </div>
+            <div className="py-1">
+              <div className="mb-2">Confirm Password</div>
+              <Field className="block w-full rounded" type="password" name="passwordConfirm" />
+              <ErrorMessage name="passwordConfirm" component="div" className="block w-full text-red-500 py-2" />
+            </div>
+            <div className="py-1">
+              <div className="mb-2">Birthday</div>
               <Field className="inline" as="select" name="birthdayMonth">
                 <option disabled="disabled" value="">Month</option>
                 {months.map((month) => <option key={month.value} value={month.value}>{month.label}</option>)}
@@ -125,11 +113,14 @@ const SignUp = () => {
                 <option disabled="disabled" value="">Year</option>
                 {years.map((year) => <option key={year.value} value={year.value}>{year.label}</option>)}
               </Field>
-              <ErrorMessage name="birthdayYear" component="div" className="block w-full bg-red-500 text-white py-2"/>
+              <ErrorMessage name="birthdayYear" component="div" className="block w-full text-red-500 py-2" />
             </div>
-            <button className="block w-full bg-blue-500 text-white py-3 font-bold" type="submit">Submit</button>
+            <div className="py-1">
+              <button className="block w-full bg-blue-500 text-white py-3 font-bold rounded-md" type="submit">Submit</button>
+            </div>
           </Form>
-      </Formik>
+        </Formik>
+      </div>
     </div>
   )
 }
