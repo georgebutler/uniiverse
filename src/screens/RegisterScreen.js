@@ -2,7 +2,7 @@ import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import moment from 'moment';
 
-const SignUp = () => {
+const RegisterScreen = () => {
   const days = []
   const years = []
   const months = [
@@ -125,4 +125,4 @@ const SignUp = () => {
   )
 }
 
-export default SignUp
+export default RegisterScreen
