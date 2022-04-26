@@ -1,8 +1,13 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import moment from 'moment';
+import { useSelector, useDispatch } from 'react-redux';
+import { setUser } from '../app/auth';
 
 const RegisterScreen = () => {
+  const user = useSelector((state) => state.user)
+  const dispatch = useDispatch()
+
   const days = []
   const years = []
   const months = [
@@ -80,6 +85,7 @@ const RegisterScreen = () => {
           }}
           onSubmit={(values, { setSubmitting }) => {
             console.log(JSON.stringify(values, null, 2));
+            dispatch(setUser(values));
             setSubmitting(false);
           }}
         >
